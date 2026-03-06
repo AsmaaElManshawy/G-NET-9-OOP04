@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Numerics;
@@ -63,6 +64,22 @@ namespace Assignment_4
             #region Question 3
 
             //Q3: What keywords are used for Method Overriding? What does each one mean ?
+            //--------------------------------------------------------------
+            //Overriding Keywords → virtual, override, base
+            //-----------------------------
+            //            1. virtual
+            //-----------------------------
+            //1- Used in the base class method.
+            //2- Indicates that the method can be overridden in a derived class.
+            //----------------------------
+            //            2. override
+            //-----------------------------
+            //1- Used in the derived class.
+            //2- Replaces the base class implementation.
+            //-----------------------------
+            //            3. base (often used with overriding)
+            //-----------------------------
+            // Used to call the base class method inside the overridden method.
 
             #endregion
 
