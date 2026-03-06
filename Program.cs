@@ -91,55 +91,46 @@ namespace Assignment_4
             //In the previous assignments, you built a Movie Ticket Booking System with inheritance, properties,
             //and static members.Now you will apply polymorphism to make the system flexible and extensible.
 
-            //What you need to build:
-
-            #region one
-
-            //1.Refactor the base Ticket class:
-
-            //a.Add a PrintTicket() method that prints: TicketId, MovieName, Price, PriceAfterTax.
-            //Child classes should be able to provide their own version of this method.
-
-            //b.Add two versions of a SetPrice method — one that takes a decimal (sets price directly)
-            //and one that takes a decimal base price and a decimal multiplier(sets price = base × multiplier).
-
-            #endregion
-
-            #region two
-
-            //2. In each child class, provide its own version of PrintTicket():
-
-            //a.StandardTicket — prints the base ticket info and the SeatNumber.
-            //b.VIPTicket — prints the base ticket info, LoungeAccess, and ServiceFee.
-            //c.IMAXTicket — prints the base ticket info and whether it is 3D.
-
-            #endregion
-
-            #region three
-
-            //3. In the Cinema class, update PrintAllTickets() so it loops through the Ticket[] array
-            //and calls PrintTicket() on each one.
-
-            #endregion
-
-            #region four
-
-            //4. Create a static method ProcessTicket(Ticket t) that takes any Ticket and calls PrintTicket() on it.
-
-            #endregion
-
             #region five
 
-            //5. In Main:
-
-            //a.Create a Cinema and open it.
-            //b.Create one StandardTicket, one VIPTicket, and one IMAXTicket.
-            //c.Test both versions of SetPrice on one ticket.
-            //d.Add all tickets to the Cinema and call PrintAllTickets().
-            //e.Call ProcessTicket() with one of the tickets.
-            //f.Close the Cinema.
-
-
+              //5. In Main:
+              
+              //a.Create a Cinema and open it.
+              //b.Create one StandardTicket, one VIPTicket, and one IMAXTicket.
+              //c.Test both versions of SetPrice on one ticket.
+              //d.Add all tickets to the Cinema and call PrintAllTickets().
+              //e.Call ProcessTicket() with one of the tickets.
+              //f.Close the Cinema.
+              //---------------------------------------------------------------
+              
+              //Cinema cinema = new Cinema("My Cinema");
+              
+              //    cinema.OpenCinema();
+              
+              //    Console.WriteLine("\n========== SetPrice Test ==========");
+              
+              //    StandardTicket t1 = new StandardTicket("Inception", "A-5");
+              //    t1.SetPrice(150);
+              //    Console.WriteLine($"Setting price directly: {t1.Price}");
+              
+              //    t1.SetPrice(100, 1.5m);
+              //    Console.WriteLine($"Setting price with multiplier: 100 x 1.5 = {t1.Price}");
+              
+              //    VIPTicket t2 = new VIPTicket("Avengers", true, 50);
+              //    t2.SetPrice(200);
+              
+              //    IMAXTicket t3 = new IMAXTicket("Dune", false);
+              //    t3.SetPrice(180);
+              
+              //    cinema.AddTicket(t1);
+              //    cinema.AddTicket(t2);
+              //    cinema.AddTicket(t3);
+              
+              //    cinema.PrintAllTickets();
+              
+              //    Cinema.ProcessTicket(t2);
+              
+              //    cinema.CloseCinema();
 
             #endregion
 
