@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Numerics;
+using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment_4
@@ -22,6 +24,22 @@ namespace Assignment_4
             #region Question 1
 
             //Q1: What is the difference between static binding and dynamic binding? When does each one happen?
+            //--------------------------------------------------------
+            //            Static Binding(Compile-Time Binding)
+            //--------------------------------------------------------
+            //The method call is resolved at compile time.
+
+            //The compiler decides which method to execute before the program runs.
+
+            //Happens with method overloading or when methods are not declared virtual.
+            //--------------------------------------------------------
+            //            Dynamic Binding(Run-Time Binding)
+            //--------------------------------------------------------
+            //The method call is resolved at runtime.
+
+            //The method that executes depends on the actual object type.
+
+            //Happens with method overriding using virtual and override.
 
             #endregion
 
