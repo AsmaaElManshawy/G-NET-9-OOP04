@@ -47,6 +47,17 @@ namespace Assignment_4
 
             //Q2 :  What is the difference between method overloading and method overriding?
 
+            //-------------------------------------------------------------------------------------------------------------------
+            // | Feature    |         Method Overloading                     |               Method Overriding                  |
+            // | ---------- | ---------------------------------------------- | -------------------------------------------------|
+            // | Definition | Same method name with different parameters     | Redefining a virtual method from a base class    |
+            // | Occurs     | Same class                                     | Base class and derived class                     |
+            // | Binding    | Static(Compile-time)                           | Dynamic(Run-time)                                |
+            // | Parameters | Must be different                              | Must be same signature                           |
+            // | Keywords   | No special keywords required                   | Uses `virtual` and `override`                    |
+            //-------------------------------------------------------------------------------------------------------------------
+
+
             #endregion
 
             #region Question 3
