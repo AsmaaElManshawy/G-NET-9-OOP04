@@ -1,6 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Channels;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment_4
@@ -13,8 +19,6 @@ namespace Assignment_4
             Console.WriteLine("Assignment 4 OOP");
             Console.WriteLine("\n" + new string('-',70) + "\n");
 
-
-
             #region Assignment
 
             #region Part 01 : Theoretical Questions
@@ -22,6 +26,22 @@ namespace Assignment_4
             #region Question 1
 
             //Q1: What is the difference between static binding and dynamic binding? When does each one happen?
+            //--------------------------------------------------------
+            //            Static Binding(Compile-Time Binding)
+            //--------------------------------------------------------
+            //The method call is resolved at compile time.
+
+            //The compiler decides which method to execute before the program runs.
+
+            //Happens with method overloading or when methods are not declared virtual.
+            //--------------------------------------------------------
+            //            Dynamic Binding(Run-Time Binding)
+            //--------------------------------------------------------
+            //The method call is resolved at runtime.
+
+            //The method that executes depends on the actual object type.
+
+            //Happens with method overriding using virtual and override.
 
             #endregion
 
@@ -29,11 +49,38 @@ namespace Assignment_4
 
             //Q2 :  What is the difference between method overloading and method overriding?
 
+            //-------------------------------------------------------------------------------------------------------------------
+            // | Feature    |         Method Overloading                     |               Method Overriding                  |
+            // | ---------- | ---------------------------------------------- | -------------------------------------------------|
+            // | Definition | Same method name with different parameters     | Redefining a virtual method from a base class    |
+            // | Occurs     | Same class                                     | Base class and derived class                     |
+            // | Binding    | Static(Compile-time)                           | Dynamic(Run-time)                                |
+            // | Parameters | Must be different                              | Must be same signature                           |
+            // | Keywords   | No special keywords required                   | Uses `virtual` and `override`                    |
+            //-------------------------------------------------------------------------------------------------------------------
+
+
             #endregion
 
             #region Question 3
 
             //Q3: What keywords are used for Method Overriding? What does each one mean ?
+            //--------------------------------------------------------------
+            //Overriding Keywords → virtual, override, base
+            //-----------------------------
+            //            1. virtual
+            //-----------------------------
+            //1- Used in the base class method.
+            //2- Indicates that the method can be overridden in a derived class.
+            //----------------------------
+            //            2. override
+            //-----------------------------
+            //1- Used in the derived class.
+            //2- Replaces the base class implementation.
+            //-----------------------------
+            //            3. base (often used with overriding)
+            //-----------------------------
+            // Used to call the base class method inside the overridden method.
 
             #endregion
 
@@ -45,43 +92,6 @@ namespace Assignment_4
             //In the previous assignments, you built a Movie Ticket Booking System with inheritance, properties,
             //and static members.Now you will apply polymorphism to make the system flexible and extensible.
 
-            //What you need to build:
-
-            #region one
-
-            //1.Refactor the base Ticket class:
-
-            //a.Add a PrintTicket() method that prints: TicketId, MovieName, Price, PriceAfterTax.
-            //Child classes should be able to provide their own version of this method.
-
-            //b.Add two versions of a SetPrice method — one that takes a decimal (sets price directly)
-            //and one that takes a decimal base price and a decimal multiplier(sets price = base × multiplier).
-
-            #endregion
-
-            #region two
-
-            //2. In each child class, provide its own version of PrintTicket():
-
-            //a.StandardTicket — prints the base ticket info and the SeatNumber.
-            //b.VIPTicket — prints the base ticket info, LoungeAccess, and ServiceFee.
-            //c.IMAXTicket — prints the base ticket info and whether it is 3D.
-
-            #endregion
-
-            #region three
-
-            //3. In the Cinema class, update PrintAllTickets() so it loops through the Ticket[] array
-            //and calls PrintTicket() on each one.
-
-            #endregion
-
-            #region four
-
-            //4. Create a static method ProcessTicket(Ticket t) that takes any Ticket and calls PrintTicket() on it.
-
-            #endregion
-
             #region five
 
             //5. In Main:
@@ -92,8 +102,36 @@ namespace Assignment_4
             //d.Add all tickets to the Cinema and call PrintAllTickets().
             //e.Call ProcessTicket() with one of the tickets.
             //f.Close the Cinema.
+            //---------------------------------------------------------------
 
+            //Cinema cinema = new Cinema("My Cinema");
 
+            //    cinema.OpenCinema();
+
+            //    Console.WriteLine("\n========== SetPrice Test ==========");
+
+            //    StandardTicket t1 = new StandardTicket("Inception", "A-5");
+            //    t1.SetPrice(150);
+            //    Console.WriteLine($"Setting price directly: {t1.Price}");
+
+            //    t1.SetPrice(100, 1.5m);
+            //    Console.WriteLine($"Setting price with multiplier: 100 x 1.5 = {t1.Price}");
+
+            //    VIPTicket t2 = new VIPTicket("Avengers", true, 50);
+            //    t2.SetPrice(200);
+
+            //    IMAXTicket t3 = new IMAXTicket("Dune", false);
+            //    t3.SetPrice(180);
+
+            //    cinema.AddTicket(t1);
+            //    cinema.AddTicket(t2);
+            //    cinema.AddTicket(t3);
+
+            //    cinema.PrintAllTickets();
+
+            //    Cinema.ProcessTicket(t2);
+
+            //    cinema.CloseCinema();
 
             #endregion
 
@@ -101,9 +139,44 @@ namespace Assignment_4
 
             #endregion
 
+            #region Practice Task
+            //=====================================================================
+            //            Build a Payment System
+            // 5.In Main, test both: create a CreditCard with balance 500 and limit 300, try to charge 700.
+            // Then create a DebitCard with balance 500 and try to charge 700.
+            // Print whether each payment succeeded or failed, and show the remaining balance.
+            //=====================================================================
+
+            //CreditCard credit = new CreditCard(500, 300);
+            //DebitCard debit = new DebitCard(500);
+
+            //Console.WriteLine("Credit Card Payment:");
+            //ProcessPayment(credit, 700);
+
+            //Console.WriteLine("Debit Card Payment:");
+            //ProcessPayment(debit, 700);
+
+
+            #endregion
 
             Console.WriteLine("\n" + new string('-', 70) + "\n");
 
         }
+
+        #region Practice Task Helper Function
+        // Works with ANY payment type
+        static void ProcessPayment(PaymentMethod payment, decimal amount)
+        {
+            bool success = payment.Charge(amount);
+
+            if (success)
+                Console.WriteLine("Payment succeeded.");
+            else
+                Console.WriteLine("Payment Failed , Insufficient Balance");
+                
+            Console.WriteLine($"Remaining Balance: {payment.Balance}");
+            Console.WriteLine(new string('-', 40));
+        }
+        #endregion
     }
 }
