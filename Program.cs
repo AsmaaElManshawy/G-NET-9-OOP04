@@ -3,7 +3,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Channels;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment_4
@@ -15,8 +18,6 @@ namespace Assignment_4
             Console.WriteLine("\n" + new string('-', 70) + "\n");
             Console.WriteLine("Assignment 4 OOP");
             Console.WriteLine("\n" + new string('-',70) + "\n");
-
-
 
             #region Assignment
 
@@ -93,44 +94,44 @@ namespace Assignment_4
 
             #region five
 
-              //5. In Main:
-              
-              //a.Create a Cinema and open it.
-              //b.Create one StandardTicket, one VIPTicket, and one IMAXTicket.
-              //c.Test both versions of SetPrice on one ticket.
-              //d.Add all tickets to the Cinema and call PrintAllTickets().
-              //e.Call ProcessTicket() with one of the tickets.
-              //f.Close the Cinema.
-              //---------------------------------------------------------------
-              
-              //Cinema cinema = new Cinema("My Cinema");
-              
-              //    cinema.OpenCinema();
-              
-              //    Console.WriteLine("\n========== SetPrice Test ==========");
-              
-              //    StandardTicket t1 = new StandardTicket("Inception", "A-5");
-              //    t1.SetPrice(150);
-              //    Console.WriteLine($"Setting price directly: {t1.Price}");
-              
-              //    t1.SetPrice(100, 1.5m);
-              //    Console.WriteLine($"Setting price with multiplier: 100 x 1.5 = {t1.Price}");
-              
-              //    VIPTicket t2 = new VIPTicket("Avengers", true, 50);
-              //    t2.SetPrice(200);
-              
-              //    IMAXTicket t3 = new IMAXTicket("Dune", false);
-              //    t3.SetPrice(180);
-              
-              //    cinema.AddTicket(t1);
-              //    cinema.AddTicket(t2);
-              //    cinema.AddTicket(t3);
-              
-              //    cinema.PrintAllTickets();
-              
-              //    Cinema.ProcessTicket(t2);
-              
-              //    cinema.CloseCinema();
+            //5. In Main:
+
+            //a.Create a Cinema and open it.
+            //b.Create one StandardTicket, one VIPTicket, and one IMAXTicket.
+            //c.Test both versions of SetPrice on one ticket.
+            //d.Add all tickets to the Cinema and call PrintAllTickets().
+            //e.Call ProcessTicket() with one of the tickets.
+            //f.Close the Cinema.
+            //---------------------------------------------------------------
+
+            //Cinema cinema = new Cinema("My Cinema");
+
+            //    cinema.OpenCinema();
+
+            //    Console.WriteLine("\n========== SetPrice Test ==========");
+
+            //    StandardTicket t1 = new StandardTicket("Inception", "A-5");
+            //    t1.SetPrice(150);
+            //    Console.WriteLine($"Setting price directly: {t1.Price}");
+
+            //    t1.SetPrice(100, 1.5m);
+            //    Console.WriteLine($"Setting price with multiplier: 100 x 1.5 = {t1.Price}");
+
+            //    VIPTicket t2 = new VIPTicket("Avengers", true, 50);
+            //    t2.SetPrice(200);
+
+            //    IMAXTicket t3 = new IMAXTicket("Dune", false);
+            //    t3.SetPrice(180);
+
+            //    cinema.AddTicket(t1);
+            //    cinema.AddTicket(t2);
+            //    cinema.AddTicket(t3);
+
+            //    cinema.PrintAllTickets();
+
+            //    Cinema.ProcessTicket(t2);
+
+            //    cinema.CloseCinema();
 
             #endregion
 
@@ -138,9 +139,44 @@ namespace Assignment_4
 
             #endregion
 
+            #region Practice Task
+            //=====================================================================
+            //            Build a Payment System
+            // 5.In Main, test both: create a CreditCard with balance 500 and limit 300, try to charge 700.
+            // Then create a DebitCard with balance 500 and try to charge 700.
+            // Print whether each payment succeeded or failed, and show the remaining balance.
+            //=====================================================================
+
+            //CreditCard credit = new CreditCard(500, 300);
+            //DebitCard debit = new DebitCard(500);
+
+            //Console.WriteLine("Credit Card Payment:");
+            //ProcessPayment(credit, 700);
+
+            //Console.WriteLine("Debit Card Payment:");
+            //ProcessPayment(debit, 700);
+
+
+            #endregion
 
             Console.WriteLine("\n" + new string('-', 70) + "\n");
 
         }
+
+        #region Practice Task Helper Function
+        // Works with ANY payment type
+        static void ProcessPayment(PaymentMethod payment, decimal amount)
+        {
+            bool success = payment.Charge(amount);
+
+            if (success)
+                Console.WriteLine("Payment succeeded.");
+            else
+                Console.WriteLine("Payment Failed , Insufficient Balance");
+                
+            Console.WriteLine($"Remaining Balance: {payment.Balance}");
+            Console.WriteLine(new string('-', 40));
+        }
+        #endregion
     }
 }
